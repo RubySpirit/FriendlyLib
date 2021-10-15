@@ -5,29 +5,27 @@ import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import lombok.Data;
 
 @Entity
 @Data
-public class Facility {
-
+public class Address {
     @Id
     private UUID id;
-    private String phone;
-    private String name;
-    private String number;
     private String city;
-    private String street;
     private String zipCode;
     private String state;
-
-    @OneToMany
-    @JoinColumn(name="id")
-    private List<Book> books;
+    private String street;
+    private String phone;
+    private String emailAddress;
 
     @OneToOne
-    private Address address;
+    @JoinColumn(name = "id")
+    private Facility facilities;
+
+    @OneToOne
+    @JoinColumn(name = "id")
+    private User user;
+
 }
