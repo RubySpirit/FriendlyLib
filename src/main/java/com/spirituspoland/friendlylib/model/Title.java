@@ -8,14 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import lombok.Data;
 
-@Entity
+@Entity(name = "titles")
 @Data
 public class Title {
     @Id
     private UUID id;
     private String author;
     private String description;
-    private File photo;
+    //private File photo;
     private double rating;
     private int numberOfVotes;
     @ManyToMany

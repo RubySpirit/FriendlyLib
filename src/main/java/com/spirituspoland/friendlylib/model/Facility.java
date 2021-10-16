@@ -10,19 +10,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import lombok.Data;
 
-@Entity
+@Entity(name = "facilities")
 @Data
 public class Facility {
 
     @Id
     private UUID id;
-    private String phone;
     private String name;
-    private String number;
-    private String city;
-    private String street;
-    private String zipCode;
-    private String state;
+    private String workingHours;
 
     @OneToMany
     @JoinColumn(name="id")

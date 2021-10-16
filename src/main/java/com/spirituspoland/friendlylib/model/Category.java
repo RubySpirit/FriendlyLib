@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import lombok.Data;
 
-@Entity
+@Entity(name = "categories")
 @Data
 public class Category {
     @Id

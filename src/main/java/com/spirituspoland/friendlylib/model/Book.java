@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import lombok.Data;
 
-@Entity
+@Entity(name = "books")
 @Data
 public class Book {
     @Id
@@ -16,7 +16,7 @@ public class Book {
 
     @ManyToOne
     private Title title;
-    private LocalDateTime added;
+    private LocalDateTime addedAt;
     private BookStatus status;
 
     @ManyToOne

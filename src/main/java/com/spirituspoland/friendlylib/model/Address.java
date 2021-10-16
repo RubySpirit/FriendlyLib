@@ -1,6 +1,6 @@
 package com.spirituspoland.friendlylib.model;
 
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,7 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import lombok.Data;
 
-@Entity
+@Entity(name = "addresses")
 @Data
 public class Address {
     @Id
@@ -19,6 +19,7 @@ public class Address {
     private String street;
     private String phone;
     private String emailAddress;
+    private LocalDateTime lastUpdated;
 
     @OneToOne
     @JoinColumn(name = "id")

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import lombok.Data;
 
-@Entity
+@Entity(name = "rental_cards")
 @Data
 public class RentalCard {
     @Id
@@ -19,6 +19,7 @@ public class RentalCard {
 
     @ManyToOne
     private Book book;
+
     private LocalDateTime rentalDate;
     private int penaltyNumber;
     private int renewalNumber;
