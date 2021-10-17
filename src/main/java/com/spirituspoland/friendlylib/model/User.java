@@ -3,6 +3,8 @@ package com.spirituspoland.friendlylib.model;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,14 +18,14 @@ public class User {
     private UUID id;
     private String firstName;
     private String lastName;
-    @ManyToOne
-    @JoinColumn(name="role_id")
+
+    @Enumerated(EnumType.STRING)
     private Role role;
     private String email;
     private String phone;
     private LocalDateTime created;
     private LocalDateTime lastLogon;
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "address_id")
     private Address address;
 }

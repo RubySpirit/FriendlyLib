@@ -4,6 +4,8 @@ package com.spirituspoland.friendlylib.model;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import lombok.Data;
@@ -17,6 +19,8 @@ public class Book {
     @ManyToOne
     private Title title;
     private LocalDateTime addedAt;
+
+    @Enumerated(EnumType.STRING)
     private BookStatus status;
 
     @ManyToOne

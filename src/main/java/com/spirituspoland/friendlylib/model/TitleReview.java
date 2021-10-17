@@ -18,11 +18,11 @@ public class TitleReview {
     private String description;
     private BigDecimal rating;
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name="id")
+    @JoinColumn(name="title_id")
     private Title title;
     private LocalDateTime createdAt;
 }

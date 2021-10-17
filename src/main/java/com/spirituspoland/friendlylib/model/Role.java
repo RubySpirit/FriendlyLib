@@ -9,14 +9,6 @@ import javax.persistence.OneToMany;
 
 import lombok.Data;
 
-@Entity(name ="roles")
-@Data
-public class Role {
-    @Id
-    private UUID id;
-
-    private String name;
-    private String description;
-    @OneToMany(mappedBy = "id")
-    private List<User> users;
+public enum Role {
+    ADMIN,LIBRARIAN,READER;
 }
