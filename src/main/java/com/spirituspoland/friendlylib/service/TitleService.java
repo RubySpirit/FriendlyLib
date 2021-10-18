@@ -1,6 +1,7 @@
 package com.spirituspoland.friendlylib.service;
 
 import com.spirituspoland.friendlylib.model.Category;
+import com.spirituspoland.friendlylib.model.Facility;
 import com.spirituspoland.friendlylib.model.Title;
 import com.spirituspoland.friendlylib.repository.TitleRepository;
 import java.util.List;
@@ -17,5 +18,9 @@ public class TitleService {
 
     public Page<Title> findAllTitlesByCategory(List<Category> categories, Pageable pageable) {
         return titleRepository.findAllByCategoriesIn(categories, pageable);
+    }
+
+    public Page<Title> findAllTitlesByCategoryAndFacilities(List<Category> categories, List<Facility> facilities, Pageable pageable){
+       return titleRepository.findAllByCategoriesInAndBooks_FacilitiesIn(categories,facilities,pageable);
     }
 }
