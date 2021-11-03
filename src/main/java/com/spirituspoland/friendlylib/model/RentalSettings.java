@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class RentalSettings {
     @Id
-    private UUID id;
+    private Long  id;
     private int maxRentalDays;
     private BigDecimal delayPenalty;
     private int maxRentalRenewals;

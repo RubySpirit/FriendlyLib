@@ -16,4 +16,9 @@ public class FacilityService {
     public Page<Facility> findAllFacilities(Pageable pageable){
         return facilityRepository.findAll(pageable);
     }
+    
+    public Facility addNewFacility(Facility facility){
+        return facilityRepository.save(facility);
+    }
+
 }

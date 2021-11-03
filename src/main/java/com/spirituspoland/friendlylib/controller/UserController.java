@@ -5,7 +5,7 @@ import com.spirituspoland.friendlylib.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Component;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,5 +23,17 @@ public class UserController {
     @GetMapping("/librarians")
     public Page<User> findAllLibrarians(Pageable pageable){
         return userService.findAllLibrarians(pageable);
+    }
+
+
+
+    @Secured({"ROLE_ADMIN","ROLE_LIBRARIAN"})
+    @PostMapping("/add/reader")
+    public User addReader(User user){
+        return userService.addReader(user);
+    }
+
+    public User addLibrarian(User user){
+        return userService.addLibrarian(user);
     }
 }
