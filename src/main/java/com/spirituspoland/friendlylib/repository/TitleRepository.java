@@ -1,6 +1,7 @@
 package com.spirituspoland.friendlylib.repository;
 
 import com.spirituspoland.friendlylib.model.Category;
+import com.spirituspoland.friendlylib.model.Facility;
 import com.spirituspoland.friendlylib.model.Title;
 import java.util.List;
 import java.util.UUID;
@@ -14,4 +15,6 @@ public interface TitleRepository extends JpaRepository<Title, UUID> {
 
     Page<Title> findAllByCategoriesIn(List<Category> categories, Pageable pageable);
 
+
+    Page<Title> findAllByCategoriesInAndBooks_FacilitiesIn(List<Category> categories,List<Facility>facilities, Pageable pageable);
 }
