@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 public class Title {
     @Id
-    private UUID id;
+    private Long  id;
     private String author;
     private String description;
     //private File photo;

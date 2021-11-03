@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class Category {
     @Id
-    private UUID id;
+    private Long  id;
     private String name;
     private String description;
 

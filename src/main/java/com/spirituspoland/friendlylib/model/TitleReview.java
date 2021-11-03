@@ -14,7 +14,7 @@ import lombok.Data;
 public class TitleReview {
 
     @Id
-    private UUID id;
+    private Long  id;
     private String description;
     private BigDecimal rating;
     @ManyToOne

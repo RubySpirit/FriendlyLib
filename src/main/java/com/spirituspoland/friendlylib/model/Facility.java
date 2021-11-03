@@ -1,5 +1,6 @@
 package com.spirituspoland.friendlylib.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import javax.persistence.Entity;
@@ -15,14 +16,19 @@ import lombok.Data;
 public class Facility {
 
     @Id
-    private UUID id;
+    private Long  id;
     private String name;
     private String workingHours;
+    private String phone;
+    private String email;
+    private String city;
+    private String zipCode;
+    private String state;
+    private String street;
+    private LocalDateTime lastUpdated;
 
     @OneToMany
     @JoinColumn(name="id")
     private List<Book> books;
 
-    @OneToOne
-    private Address address;
 }

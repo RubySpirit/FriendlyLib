@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 public class RentalCard {
     @Id
-    private UUID id;
+    private Long  id;
 
     @ManyToOne
     private User user;

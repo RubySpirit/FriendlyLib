@@ -14,7 +14,7 @@ import lombok.Data;
 @Data
 public class Book {
     @Id
-    private UUID id;
+    private Long  id;
 
     @ManyToOne
     private Title title;
