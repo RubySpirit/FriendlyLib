@@ -14,5 +14,12 @@ spring:
     url: jdbc:postgresql://localhost:5432/friendlyLib
     username: admin
     password: admin
-
+friendlylib:
+  jwt:
+    accessTokenSecret: password
+    refreshTokenSecret: refreshPassword
+    issuer: FriendlyLib
+    tokenExpirationTime:   20
+    refreshTokenExpirationTime:   60
+    rememberMeExpirationTime: 7200
 

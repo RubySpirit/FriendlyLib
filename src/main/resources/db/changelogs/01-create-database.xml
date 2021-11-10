@@ -4,6 +4,24 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
     <changeSet author="RubySpirit" id="2021-10-16-1">
+        <createTable tableName="facilities">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(50)"/>
+            <column name="working_hours" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(50)"/>
+            <column name="phone" type="VARCHAR(30)"/>
+            <column name="city" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="zip_code" type="VARCHAR(10)"/>
+            <column name="state" type="VARCHAR(30)"/>
+            <column name="street" type="VARCHAR(30)"/>
+            <column name="last_updated" type="datetime" defaultValue="NOW()"/>
+        </createTable>
 
         <createTable tableName="users">
             <column name="id" type="bigint" autoIncrement="true">
@@ -17,9 +35,12 @@
             </column>
             <column name="email" type="VARCHAR(50)"/>
             <column name="created_at" type="datetime" defaultValue="NOW()"/>
-            <column name="last_logon" type="datetime"/>
+            <column name="last_logon_at" type="datetime"/>
             <column name="password" type="VARCHAR(100)">
                 <constraints nullable="false"/>
+            </column>
+            <column name="origin_facility_id" type="bigint">
+                <constraints foreignKeyName="origin_facility_id_FK" referencedTableName="facilities" referencedColumnNames="id" nullable="false"/>
             </column>
             <column name="active" type="boolean" defaultValue="false"/>
             <column name="city" type="VARCHAR(30)">
@@ -30,6 +51,7 @@
             <column name="phone" type="VARCHAR(30)"/>
             <column name="last_updated" type="datetime" defaultValue="NOW()"/>
         </createTable>
+
 
         <createTable tableName="titles">
             <column name="id" type="bigint" autoIncrement="true">
@@ -46,6 +68,7 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(20)"/>
+            <column name="description" type="VARCHAR(255)"/>
         </createTable>
 
         <createTable tableName="role_assignment">
@@ -80,24 +103,6 @@
             </column>
         </createTable>
 
-        <createTable tableName="facilities">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="name" type="VARCHAR(50)"/>
-            <column name="working_hours" type="text">
-                <constraints nullable="false"/>
-            </column>
-            <column name="email" type="VARCHAR(50)"/>
-            <column name="phone" type="VARCHAR(30)"/>
-            <column name="city" type="VARCHAR(30)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="zip_code" type="VARCHAR(10)"/>
-            <column name="state" type="VARCHAR(30)"/>
-            <column name="street" type="VARCHAR(30)"/>
-            <column name="last_updated" type="datetime" defaultValue="NOW()"/>
-        </createTable>
 
         <createTable tableName="books">
             <column name="id" type="bigint" autoIncrement="true">
@@ -111,7 +116,7 @@
             </column>
             <column name="book_status" type="VARCHAR(20)"/>
             <column name="facility_id" type="bigint">
-                <constraints foreignKeyName="book_facility_FK" referencedTableName="facilities" referencedColumnNames="id"/>
+                <constraints foreignKeyName="book_facility_FK" referencedTableName="facilities" referencedColumnNames="id" nullable="false"/>
             </column>
         </createTable>
 

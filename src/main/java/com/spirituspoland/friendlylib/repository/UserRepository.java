@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface UserRepository extends JpaRepository<User, UUID> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     Page<User> findAllByRoles_NameIsOrRoles_NameIs(RoleName firstRoleName, RoleName secondRoleName, Pageable pageable);
 

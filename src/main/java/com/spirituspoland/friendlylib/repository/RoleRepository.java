@@ -1,16 +1,15 @@
 package com.spirituspoland.friendlylib.repository;
 
 import com.spirituspoland.friendlylib.model.Role;
-import com.spirituspoland.friendlylib.model.User;
+import com.spirituspoland.friendlylib.model.RoleName;
 import java.util.List;
-import java.util.UUID;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, UUID> {
+public interface RoleRepository extends JpaRepository<Role, Long> {
 
+    Optional<Role> findByName(RoleName roleName);
 }

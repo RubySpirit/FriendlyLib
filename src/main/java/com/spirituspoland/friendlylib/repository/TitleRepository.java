@@ -11,10 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TitleRepository extends JpaRepository<Title, UUID> {
+public interface TitleRepository extends JpaRepository<Title, Long> {
 
-    Page<Title> findAllByCategoriesIn(List<Category> categories, Pageable pageable);
-
-
-    Page<Title> findAllByCategoriesInAndBooks_FacilitiesIn(List<Category> categories,List<Facility>facilities, Pageable pageable);
 }

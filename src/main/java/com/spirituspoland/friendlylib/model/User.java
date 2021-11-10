@@ -1,38 +1,55 @@
 package com.spirituspoland.friendlylib.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import lombok.Data;
+import javax.persistence.PrimaryKeyJoinColumn;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity(name = "users")
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
-    private Long  id;
+    private Long id;
     private String firstName;
     private String lastName;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "role_assignment",
         joinColumns = {@JoinColumn(name = "user_id")},
         inverseJoinColumns = {@JoinColumn(name = "role_id")}
     )
+    @ToString.Exclude
+    @JsonIgnore
     private List<Role> roles;
 
     private String email;
+    @ManyToOne
+    @JoinColumn(name = "origin_facility_id")
+    private Facility originFacility;
+
     private String phone;
-    private LocalDateTime created;
-    private LocalDateTime lastLogon;
+    private LocalDateTime createdAt;
+    private LocalDateTime lastLogonAt;
     private String password;
     private boolean active;
     private String city;

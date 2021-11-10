@@ -1,5 +1,5 @@
 package com.spirituspoland.friendlylib.dto;
 
-public record BookDTO(UUID uuid, String title) {
+public record BookDTO(Long uuid, String title) {
 
 }

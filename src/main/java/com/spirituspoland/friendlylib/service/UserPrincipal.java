@@ -2,27 +2,30 @@ package com.spirituspoland.friendlylib.service;
 
 import com.spirituspoland.friendlylib.model.Role;
 import com.spirituspoland.friendlylib.model.User;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @AllArgsConstructor
 @Data
+@Slf4j
 public class UserPrincipal implements UserDetails {
     private User user;
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getRoles().stream()
+        List<SimpleGrantedAuthority> authorities = user.getRoles().stream()
             .map(this::getAuthority)
             .collect(Collectors.toList());
+        log.info("User roles:" + authorities);
+        return authorities;
     }
 
     @Override
@@ -32,7 +35,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getUsername() {
-        return String.format("%s %s",user.getFirstName(),user.getLastName());
+        return user.getEmail();
     }
 
     @Override
@@ -55,7 +58,11 @@ public class UserPrincipal implements UserDetails {
         return user.isActive();
     }
 
-    private SimpleGrantedAuthority getAuthority(Role role){
-        return new SimpleGrantedAuthority(String.format("ROLE_%s",role.getName().name()));
+    public User getUser() {
+        return user;
+    }
+
+    private SimpleGrantedAuthority getAuthority(Role role) {
+        return new SimpleGrantedAuthority(String.format("ROLE_%s", role.getName().name()));
     }
 }

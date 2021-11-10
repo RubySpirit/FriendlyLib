@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.Data;
 
@@ -24,6 +25,7 @@ public class Book {
     private BookStatus status;
 
     @ManyToOne
+    @JoinColumn(name="facility_id")
     private Facility facility;
 
 }

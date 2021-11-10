@@ -31,4 +31,7 @@ public class Facility {
     @JoinColumn(name="id")
     private List<Book> books;
 
+    @OneToMany(mappedBy = "originFacility")
+    private List<User> users;
+
 }

@@ -9,6 +9,30 @@
     <property name="LIBRARIAN_ROLE_ID" value="2"/>
     <property name="READER_ROLE_ID" value="3"/>
 
+
+    <property name="LIBRARIAN_ROLE_ID" value="2"/>
+    <property name="LIBRARIAN_USER_ID" value="2"/>
+
+    <property name="READER_ROLE_ID" value="3"/>
+    <property name="READER_USER_ID" value="3"/>
+
+    <property name="FACILITY_ID" value="1"/>
+
+
+    <changeSet author="RubySpirit" id="2021-11-03-insert-basic-facility">
+        <insert tableName="facilities">
+            <column name="name" value="Facility no.1 "/>
+            <column name="working_hours" value=""/>
+            <column name="email" value="facility_1@friendlyLib.com"/>
+            <column name="city" value="Sosnowiec"/>
+            <column name="zip_code" value="41-200"/>
+            <column name="state" value="Slaskie"/>
+            <column name="street" value="J. Kossaka 10A"/>
+            <column name="last_updated" value="now()"/>
+        </insert>
+    </changeSet>
+
+
     <changeSet author="RubySpirit" id="2021-11-03-insert-roles">
         <insert tableName="roles">
             <column name="id" value="${ADMIN_ROLE_ID}"/>
@@ -23,21 +47,59 @@
             <column name="name" value="READER"/>
         </insert>
     </changeSet>
+
     <changeSet author="RubySpirit" id="2021-11-03-insert-admin-user">
-    <insert tableName="users">
+        <insert tableName="users">
             <column name="first_name" value="admin_first_name"/>
             <column name="last_name" value="admin_last_name"/>
             <column name="email" value="admin@friendlylib.com"/>
             <column name="phone" value="517071670"/>
             <column name="password" value="$2a$11$VvT1nv.AC0/BXJ7kaR5PM.Q.DS4iT7DIjCtcaPPvUsW6tQNh8.khG"/>
             <column name="active" valueBoolean="true"/>
+            <column name="origin_facility_id" value="${FACILITY_ID}"/>
+        </insert>
+
+        <insert tableName="role_assignment">
+            <column name="user_id" value="${ADMIN_USER_ID}"/>
+            <column name="role_id" value="${ADMIN_ROLE_ID}"/>
         </insert>
     </changeSet>
 
-    <changeSet author="RubySpirit" id="2021-11-03-join-user-with-admin-role">
-    <insert tableName="role_assignment">
-            <column name="user_id" value="${ADMIN_USER_ID}"/>
-            <column name="role_id" value="${ADMIN_ROLE_ID}"/>
+
+    <changeSet author="RubySpirit" id="2021-11-03-insert-librarian-user">
+        <insert tableName="users">
+            <column name="first_name" value="librarian_first_name"/>
+            <column name="last_name" value="librarian_last_name"/>
+            <column name="email" value="librarian@friendlylib.com"/>
+            <column name="phone" value="5181218461"/>
+            <column name="password" value="$2a$12$IcGeE0.oyI2rb8nqP2z0lu/qpFF0JvmM4qa1aEiBqvbLmm5D3pq2."/>
+            <column name="active" valueBoolean="true"/>
+            <column name="origin_facility_id" value="${FACILITY_ID}"/>
+
+        </insert>
+
+        <insert tableName="role_assignment">
+            <column name="user_id" value="${LIBRARIAN_USER_ID}"/>
+            <column name="role_id" value="${LIBRARIAN_ROLE_ID}"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet author="RubySpirit" id="2021-11-03-insert-reader-user">
+        <insert tableName="users">
+            <column name="first_name" value="reader_first_name"/>
+            <column name="last_name" value="reader_last_name"/>
+            <column name="email" value="reader@friendlylib.com"/>
+            <column name="phone" value="1227554825"/>
+            <column name="password" value="$2a$12$Q5XZBxJZ4fxanOPB1w4vW.K7/.TUeUkQRiXb1IHyizqwG/VyhkaDC"/>
+            <column name="active" valueBoolean="true"/>
+            <column name="origin_facility_id" value="${FACILITY_ID}"/>
+
+        </insert>
+
+        <insert tableName="role_assignment">
+            <column name="user_id" value="${READER_USER_ID}"/>
+            <column name="role_id" value="${READER_ROLE_ID}"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

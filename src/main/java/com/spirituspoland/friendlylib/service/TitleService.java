@@ -15,12 +15,4 @@ import org.springframework.stereotype.Service;
 public class TitleService {
     private final TitleRepository titleRepository;
 
-
-    public Page<Title> findAllTitlesByCategory(List<Category> categories, Pageable pageable) {
-        return titleRepository.findAllByCategoriesIn(categories, pageable);
-    }
-
-    public Page<Title> findAllTitlesByCategoryAndFacilities(List<Category> categories, List<Facility> facilities, Pageable pageable){
-       return titleRepository.findAllByCategoriesInAndBooks_FacilitiesIn(categories,facilities,pageable);
-    }
 }

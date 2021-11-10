@@ -1,5 +1,7 @@
 package com.spirituspoland.friendlylib.service;
 
+import com.spirituspoland.friendlylib.dto.BasicFacilityDTO;
+import com.spirituspoland.friendlylib.mapper.FacilityMapper;
 import com.spirituspoland.friendlylib.model.Facility;
 import com.spirituspoland.friendlylib.repository.FacilityRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +14,9 @@ import org.springframework.stereotype.Service;
 public class FacilityService {
 
     private final FacilityRepository facilityRepository;
-
-    public Page<Facility> findAllFacilities(Pageable pageable){
-        return facilityRepository.findAll(pageable);
+    private final FacilityMapper facilityMapper;
+    public Page<BasicFacilityDTO> findAllFacilities(Pageable pageable){
+        return facilityRepository.findAll(pageable).map(facilityMapper::toDto);
     }
     
     public Facility addNewFacility(Facility facility){
