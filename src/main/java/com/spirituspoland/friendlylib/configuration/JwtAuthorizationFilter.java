@@ -4,6 +4,8 @@ import static org.springframework.http.HttpStatus.OK;
 
 import com.spirituspoland.friendlylib.jwt.JwtProperties;
 import com.spirituspoland.friendlylib.jwt.tokenproviders.JwtAccessTokenProvider;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
@@ -38,17 +40,26 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 filterChain.doFilter(request, response);
                 return;
             }
-            String token = authorizationHeader.substring(JwtProperties.TOKEN_PREFIX.length());
-            String email = jwtAccessTokenProvider.getSubject(token);
-            SecurityContext securityContext = SecurityContextHolder.getContext();
-            if (jwtAccessTokenProvider.isTokenValid(email, token) && securityContext.getAuthentication() == null) {
-                List<GrantedAuthority> authorities = jwtAccessTokenProvider.getAuthoritiesFromToken(token);
-                Authentication authentication = jwtAccessTokenProvider.getAuthentication(email, authorities, request);
-                securityContext.setAuthentication(authentication);
-            } else {
-                SecurityContextHolder.clearContext();
+            try {
+                String token = authorizationHeader.substring(JwtProperties.TOKEN_PREFIX.length());
+                String email = jwtAccessTokenProvider.getSubject(token);
+                SecurityContext securityContext = SecurityContextHolder.getContext();
+
+                if (jwtAccessTokenProvider.isTokenValid(email, token) && securityContext.getAuthentication() == null) {
+                    List<GrantedAuthority> authorities = jwtAccessTokenProvider.getAuthoritiesFromToken(token);
+                    Authentication authentication = jwtAccessTokenProvider.getAuthentication(email, authorities, request);
+                    securityContext.setAuthentication(authentication);
+                } else {
+                    SecurityContextHolder.clearContext();
+                }
+            } catch ( ExpiredJwtException ex) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED,"JWT token expired");
+            return;
+            }
+            catch (JwtException ex){
+                response.sendError(HttpServletResponse.SC_FORBIDDEN,ex.getMessage());
             }
         }
-        filterChain.doFilter(request,response);
+        filterChain.doFilter(request, response);
     }
 }
