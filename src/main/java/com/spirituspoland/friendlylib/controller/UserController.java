@@ -31,6 +31,7 @@ public class UserController {
         return userService.findAllUsers(pageable);
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_LIBRARIAN"})
     @GetMapping("/readers")
     public Page<User> findAllReaders(Pageable pageable) {
         return userService.findAllReaders(pageable);

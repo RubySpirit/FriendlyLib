@@ -1,6 +1,7 @@
 package com.spirituspoland.friendlylib.dto;
 
-public record BasicFacilityDTO(String name,
+public record BasicFacilityDTO(Long id,
+                               String name,
                                String workingHours,
                                String phone,
                                String email,
