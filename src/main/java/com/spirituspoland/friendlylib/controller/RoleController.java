@@ -7,6 +7,7 @@ import com.spirituspoland.friendlylib.service.RoleService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class RoleController {
     private final RoleService roleService;
 
+
+    @Secured({"ROLE_ADMIN","ROLE_READER"})
     @GetMapping
     public ResponseEntity<List<RoleDto>> findAllRoles(){
         return ResponseEntity.ok(roleService.findAllRoles());

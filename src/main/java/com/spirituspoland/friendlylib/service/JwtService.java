@@ -8,6 +8,7 @@ import com.spirituspoland.friendlylib.jwt.responses.RefreshJwtResponse;
 import com.spirituspoland.friendlylib.model.User;
 import com.spirituspoland.friendlylib.repository.UserRepository;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,12 +32,13 @@ public class JwtService {
     }
 
     public RefreshJwtResponse refresh(String refreshToken) {
-        Claims decodedJWT = jwtRefreshTokenProvider.verifyToken(refreshToken);
-        UserPrincipal user = findUser(decodedJWT.getSubject());
-        String jwtToken = jwtRefreshTokenProvider.generateJwtToken(user);
-        boolean rememberMe = decodedJWT.get("remember_me",Boolean.class);
-        String newRefreshToken = jwtRefreshTokenProvider.generateJwtToken(user, rememberMe);
-        return new RefreshJwtResponse(jwtToken, newRefreshToken);
+            Claims decodedJWT = jwtRefreshTokenProvider.verifyToken(refreshToken);
+            UserPrincipal user = findUser(decodedJWT.getSubject());
+            String jwtToken = jwtRefreshTokenProvider.generateJwtToken(user);
+            boolean rememberMe = decodedJWT.get("remember_me", Boolean.class);
+            String newRefreshToken = jwtRefreshTokenProvider.generateJwtToken(user, rememberMe);
+            return new RefreshJwtResponse(jwtToken, newRefreshToken);
+
     }
 
     private void authenticate(String username, String password) {

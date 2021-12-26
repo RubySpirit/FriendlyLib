@@ -5,6 +5,7 @@ import com.spirituspoland.friendlylib.jwt.request.JwtRequest;
 import com.spirituspoland.friendlylib.jwt.responses.LoginJwtResponse;
 import com.spirituspoland.friendlylib.jwt.responses.RefreshJwtResponse;
 import com.spirituspoland.friendlylib.service.JwtService;
+import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,8 @@ public class JwtAuthenticationController {
              refreshJwtResponse = jwtService.refresh(jwtRefreshRequest.refreshToken());
         } catch (NullPointerException e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        } catch (JwtException ex){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         return ResponseEntity.ok(refreshJwtResponse);
     }
