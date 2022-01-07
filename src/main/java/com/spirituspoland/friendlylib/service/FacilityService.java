@@ -34,6 +34,7 @@ public class FacilityService {
                         .orElseThrow(EntityNotFoundException::new));
     }
 
+
     public BasicFacilityDTO updateFacility(BasicFacilityDTO facilityDTO) {
         Facility facility = facilityRepository.findById(facilityDTO.id())
                 .orElseThrow(EntityNotFoundException::new);

@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.spirituspoland.friendlylib.dto.BasicFacilityDTO;
 import lombok.Data;
 
 @Entity(name = "facilities")

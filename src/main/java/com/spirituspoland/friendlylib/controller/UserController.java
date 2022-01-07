@@ -54,6 +54,8 @@ public class UserController {
     public User addReader(User user) {
         return userService.addReader(user);
     }
+
+    @Secured({"ROLE_ADMIN"})
     public User addLibrarian(User user) {
         return userService.addLibrarian(user);
     }
